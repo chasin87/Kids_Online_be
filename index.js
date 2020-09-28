@@ -5,8 +5,6 @@ const app = express();
  * Config vars
  */
 
-const PORT = process.env.PORT || 4000;
-
 /**
  * Middlewares
  */
@@ -46,6 +44,9 @@ app.use(loggerMiddleWare("dev"));
 const bodyParserMiddleWare = express.json();
 app.use(bodyParserMiddleWare);
 
+const corsMiddleWare = require("cors");
+app.use(corsMiddleWare());
+
 /**
  * Routes
  *
@@ -65,7 +66,15 @@ app.post("/echo", (req, res) => {
   });
 });
 
+const { PORT } = require("./config/constants");
+
+const authRouter = require("./routers/auth");
+app.use("/", authRouter);
+
 // Listen for connections on specified port (default is port 4000)
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
+
+const cors = require("cors");
+app.use(cors());

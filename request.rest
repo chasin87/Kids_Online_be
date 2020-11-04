@@ -1,8 +1,11 @@
-POST http://localhost:5000/login
-Content-Type: application/json
-
+POST http://localhost:8888/upload
+# Content-Type: application/json
 
 {
-  "email": "info@kidsonline.nl",
-  "password": "kids"
+"question_text": "wat rijmt er op dak?",
 }
+
+
+
+
+

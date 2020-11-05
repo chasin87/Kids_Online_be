@@ -68,6 +68,9 @@ app.post("/echo", (req, res) => {
 
 const { PORT } = require("./config/constants");
 
+const uploadRouter = require("./routers/quizzes");
+app.use("/", uploadRouter);
+
 const authRouter = require("./routers/auth");
 app.use("/", authRouter);
 

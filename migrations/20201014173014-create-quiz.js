@@ -14,6 +14,9 @@ module.exports = {
       questionImage: {
         type: Sequelize.STRING,
       },
+      questionSound: {
+        type: Sequelize.STRING,
+      },
       questionCategory: {
         type: Sequelize.STRING,
       },

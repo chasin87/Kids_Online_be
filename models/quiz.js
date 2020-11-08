@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       question: { type: DataTypes.STRING, unique: true },
       questionImage: { type: DataTypes.STRING, unique: true },
+      questionSound: { type: DataTypes.STRING, unique: true },
       questionCategory: { type: DataTypes.STRING },
       questionLevel: { type: DataTypes.INTEGER },
     },

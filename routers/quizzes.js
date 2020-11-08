@@ -35,7 +35,16 @@ router.post("/upload", upload.single("questionImage"), async function (
   }
 });
 
-module.exports = router;
+router.delete("/upload/:id", async (req, res) => {
+  try {
+    const question = await Quizes.destroy({
+      where: { id: req.params.id },
+    });
+    res.status(200).json(question);
+  } catch (e) {
+    console.log("error: ", e);
+  }
+});
 
 // router.get("/upload/:id", async (req, res) => {
 //   try {
@@ -47,3 +56,4 @@ module.exports = router;
 //     console.log("error: ", e);
 //   }
 // });
+module.exports = router;

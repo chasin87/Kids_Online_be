@@ -71,6 +71,9 @@ const { PORT } = require("./config/constants");
 const uploadRouter = require("./routers/quizzes");
 app.use("/", uploadRouter);
 
+const answerRouter = require("./routers/quizzes");
+app.use("/", answerRouter);
+
 const authRouter = require("./routers/auth");
 app.use("/", authRouter);
 

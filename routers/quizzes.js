@@ -3,14 +3,24 @@ const { Router } = require("express");
 const multer = require("multer");
 
 const Quizes = require("../models/").quiz;
-
 const router = new Router();
 const upload = multer();
+
+const Answers = require("../models/").answer;
 
 router.get("/upload", async (req, res) => {
   try {
     const allQuizes = await Quizes.findAll();
     res.status(200).json(allQuizes);
+  } catch (e) {
+    console.log("error: ", e);
+  }
+});
+
+router.get("/answer", async (req, res) => {
+  try {
+    const allAnswers = await Answers.findAll();
+    res.status(200).json(allAnswers);
   } catch (e) {
     console.log("error: ", e);
   }

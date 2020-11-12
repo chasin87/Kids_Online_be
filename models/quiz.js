@@ -24,5 +24,13 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "quiz",
     }
   );
+
+  quiz.associate = function (models) {
+    quiz.hasMany(models.answer);
+    // quiz.belongsToMany(models.matchRequest, {
+    //   through: "match",
+    //   foreignKey: "userId",
+    // });
+  };
   return quiz;
 };

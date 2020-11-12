@@ -6,7 +6,7 @@ module.exports = {
       "quizzes",
       [
         {
-          id: 0,
+          id: 1,
           question: "Wat rijmt er op vogel?",
           questionImage:
             "https://www.thailandblog.nl/wp-content/uploads/olifant_1596648931.jpg",

@@ -66,7 +66,7 @@ router.delete("/answer/:id", async (req, res) => {
     console.log("error: ", e);
   }
 });
-
+module.exports = router;
 // router.get("/upload/:id", async (req, res) => {
 //   try {
 //     const question = await Quizes.findOne({
@@ -76,5 +76,4 @@ router.delete("/answer/:id", async (req, res) => {
 //   } catch (e) {
 //     console.log("error: ", e);
 //   }
-// });
-module.exports = router;
+// })

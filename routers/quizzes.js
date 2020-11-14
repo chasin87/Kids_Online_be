@@ -56,6 +56,17 @@ router.delete("/upload/:id", async (req, res) => {
   }
 });
 
+router.delete("/answer/:id", async (req, res) => {
+  try {
+    const answer = await Answers.destroy({
+      where: { quizId: req.params.id },
+    });
+    res.status(200).json(answer);
+  } catch (e) {
+    console.log("error: ", e);
+  }
+});
+
 // router.get("/upload/:id", async (req, res) => {
 //   try {
 //     const question = await Quizes.findOne({

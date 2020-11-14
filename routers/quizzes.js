@@ -76,5 +76,5 @@ router.delete("/answer/:id", async (req, res) => {
 //   } catch (e) {
 //     console.log("error: ", e);
 //   }
-// })
+// });
 module.exports = router;

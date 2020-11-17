@@ -45,6 +45,23 @@ router.post("/upload", upload.single("questionImage"), async function (
   }
 });
 
+router.post("/answer", upload.single("questionImage"), async function (
+  req,
+  res,
+  next
+) {
+  const file = req.body.answerImage;
+  const answer = req.body;
+
+  try {
+    const newAnswer = await Answers.create(answer, file);
+    console.log(newAnswer.dataValues);
+    res.status(201).send({ message: "Create newAnswer", answer: newAnswer });
+  } catch (error) {
+    console.log("error: ", error);
+  }
+});
+
 router.delete("/upload/:id", async (req, res) => {
   try {
     const question = await Quizes.destroy({

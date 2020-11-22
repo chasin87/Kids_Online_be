@@ -14,6 +14,7 @@ module.exports = {
             "http://www.orangefreesounds.com/wp-content/uploads/2020/02/Meowing-cat-sound.mp3",
           questionCategory: "Rijmen",
           questionLevel: 1,
+          questionComplete: false,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

@@ -1,8 +1,12 @@
-POST http://localhost:8888/upload
+PATCH  http://localhost:8888/upload/9
 # Content-Type: application/json
 
 {
-"question_text": "wat rijmt er op dak?",
+  "completer": {
+
+"questionComplete": true
+
+  }
 }
 
 

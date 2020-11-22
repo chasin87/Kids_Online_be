@@ -26,41 +26,41 @@ router.get("/answer", async (req, res) => {
   }
 });
 
-router.post("/upload", upload.single("questionImage"), async function (
-  req,
-  res,
-  next
-) {
-  const file = req.body.questionImage;
-  const question = req.body;
+router.post(
+  "/upload",
+  upload.single("questionImage"),
+  async function (req, res, next) {
+    const file = req.body.questionImage;
+    const question = req.body;
 
-  try {
-    const newQuestion = await Quizes.create(question, file);
-    console.log(newQuestion.dataValues);
-    res
-      .status(201)
-      .send({ message: "Create newQuestion", question: newQuestion });
-  } catch (error) {
-    console.log("error: ", error);
+    try {
+      const newQuestion = await Quizes.create(question, file);
+      console.log(newQuestion.dataValues);
+      res
+        .status(201)
+        .send({ message: "Create newQuestion", question: newQuestion });
+    } catch (error) {
+      console.log("error: ", error);
+    }
   }
-});
+);
 
-router.post("/answer", upload.single("questionImage"), async function (
-  req,
-  res,
-  next
-) {
-  const file = req.body.answerImage;
-  const answer = req.body;
+router.post(
+  "/answer",
+  upload.single("answerImage"),
+  async function (req, res, next) {
+    const file = req.body.answerImage;
+    const answer = req.body;
 
-  try {
-    const newAnswer = await Answers.create(answer, file);
-    console.log(newAnswer.dataValues);
-    res.status(201).send({ message: "Create newAnswer", answer: newAnswer });
-  } catch (error) {
-    console.log("error: ", error);
+    try {
+      const newAnswer = await Answers.create(answer, file);
+      console.log(newAnswer.dataValues);
+      res.status(201).send({ message: "Create newAnswer", answer: newAnswer });
+    } catch (error) {
+      console.log("error: ", error);
+    }
   }
-});
+);
 
 router.delete("/upload/:id", async (req, res) => {
   try {
@@ -83,6 +83,18 @@ router.delete("/answer/:id", async (req, res) => {
     console.log("error: ", e);
   }
 });
+
+router.patch("/upload/:id", async (req, res) => {
+  try {
+    const completer = await Quizes.findByPk(req.params.id);
+    completer.update({ questionComplete: true });
+
+    res.status(201).json(completer);
+  } catch (e) {
+    console.log("error: ", e);
+  }
+});
+
 module.exports = router;
 // router.get("/upload/:id", async (req, res) => {
 //   try {

@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       questionSound: { type: DataTypes.STRING, unique: true },
       questionCategory: { type: DataTypes.STRING },
       questionLevel: { type: DataTypes.INTEGER },
+      questionComplete: { type: DataTypes.BOOLEAN },
     },
     {
       sequelize,
@@ -27,10 +28,6 @@ module.exports = (sequelize, DataTypes) => {
 
   quiz.associate = function (models) {
     quiz.hasMany(models.answer);
-    // quiz.belongsToMany(models.matchRequest, {
-    //   through: "match",
-    //   foreignKey: "userId",
-    // });
   };
   return quiz;
 };

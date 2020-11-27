@@ -26,6 +26,17 @@ router.get("/answer", async (req, res) => {
   }
 });
 
+router.get("/answer/:id", async (req, res) => {
+  try {
+    const idAnswer = await Answers.findAll({
+      where: { quizId: req.params.id },
+    });
+    res.status(200).json(idAnswer);
+  } catch (e) {
+    console.log("error: ", e);
+  }
+});
+
 router.post(
   "/upload",
   upload.single("questionImage"),
@@ -96,13 +107,3 @@ router.patch("/upload/:id", async (req, res) => {
 });
 
 module.exports = router;
-// router.get("/upload/:id", async (req, res) => {
-//   try {
-//     const question = await Quizes.findOne({
-//       where: { id: req.params.id },
-//     });
-//     res.status(200).json(question);
-//   } catch (e) {
-//     console.log("error: ", e);
-//   }
-// })

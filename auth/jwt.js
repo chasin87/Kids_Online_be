@@ -10,4 +10,12 @@ function toData(token) {
   return jwt.verify(token, jwtSecret);
 }
 
-module.exports = { toJWT, toData };
+function GebruikertoJWT(data) {
+  return jwt.sign(data, jwtSecret, { expiresIn: "2h" });
+}
+
+function GebruikertoData(token) {
+  return jwt.verify(GebruikerToken, jwtSecret);
+}
+
+module.exports = { toJWT, toData, GebruikertoJWT, GebruikertoData };

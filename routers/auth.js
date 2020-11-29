@@ -1,7 +1,9 @@
 const bcrypt = require("bcrypt");
 const { Router } = require("express");
 const { toJWT } = require("../auth/jwt");
+const { GebruikertoJWT } = require("../auth/jwt");
 const authMiddleware = require("../auth/middleware");
+const gebruikerAuthMiddleware = require("../auth/gebruikerMiddleware");
 const User = require("../models/").user;
 const Gebruiker = require("../models/").gebruiker;
 
@@ -36,6 +38,26 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.get("/me", authMiddleware, async (req, res) => {
+  // don't send back the password hash
+  const user = await User.findOne({
+    where: { email },
+  });
+  delete req.user.dataValues["password"];
+
+  res.status(200).send({ ...req.user.dataValues, user });
+});
+
+router.get("/meGebruiker", gebruikerAuthMiddleware, async (req, res) => {
+  // don't send back the password hash
+  const gebruiker = await Gebruiker.findOne({
+    where: { email },
+  });
+  delete req.gebruiker.dataValues["password"];
+
+  res.status(200).send({ ...req.gebruiker.dataValues, gebruiker });
+});
+
 router.post("/gebruikerLogin", async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -53,10 +75,10 @@ router.post("/gebruikerLogin", async (req, res, next) => {
         message: "User with that email not found or password incorrect",
       });
     }
-
+    console.log(gebruiker);
     delete gebruiker.dataValues["password"]; // don't send back the password hash
-    const token = toJWT({ gebruikerId: gebruiker.id });
-    return res.status(200).send({ token, ...gebruiker.dataValues });
+    const gebruikerToken = GebruikertoJWT({ gebruikerId: gebruiker.id });
+    return res.status(200).send({ gebruikerToken, ...gebruiker.dataValues });
   } catch (error) {
     console.log(error);
     return res.status(400).send({ message: "Something went wrong, sorry" });
@@ -82,9 +104,9 @@ router.post("/signup", async (req, res) => {
 
     delete newUser.dataValues["password"]; // don't send back the password hash
 
-    const token = toJWT({ userId: newUser.id });
+    const token = GebruikertoJWT({ userId: newUser.id });
 
-    res.status(201).json({ token, ...newUser.dataValues });
+    res.status(201).json({ GebruikerToken, ...newUser.dataValues });
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
       return res

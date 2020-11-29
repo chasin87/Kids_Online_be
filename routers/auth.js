@@ -36,10 +36,35 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.post("/gebruikerLogin", async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res
+        .status(400)
+        .send({ message: "Please provide both email and password" });
+    }
+
+    const gebruiker = await Gebruiker.findOne({ where: { email } });
+
+    if (!gebruiker || !bcrypt.compareSync(password, gebruiker.password)) {
+      return res.status(400).send({
+        message: "User with that email not found or password incorrect",
+      });
+    }
+
+    delete gebruiker.dataValues["password"]; // don't send back the password hash
+    const token = toJWT({ gebruikerId: gebruiker.id });
+    return res.status(200).send({ token, ...gebruiker.dataValues });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ message: "Something went wrong, sorry" });
+  }
+});
+
 router.post("/signup", async (req, res) => {
-  console.log("inkomende body", req.body);
   const { userName, email, password, level } = req.body;
-  console.log("opgeslagen ", userName, email, password, level);
 
   if (!userName || !email || !password || !level) {
     return res.status(400).send({
@@ -54,8 +79,6 @@ router.post("/signup", async (req, res) => {
       password: bcrypt.hashSync(password, SALT_ROUNDS),
       level,
     });
-
-    console.log("newUser", newUser);
 
     delete newUser.dataValues["password"]; // don't send back the password hash
 

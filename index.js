@@ -14,6 +14,7 @@ const app = express();
  *
  * simple logging middleware so you can see
  * what happened to your request
+ *
  * example:
  *
  * METHOD   PATH        STATUS  RESPONSE_TIME   - Content-Length

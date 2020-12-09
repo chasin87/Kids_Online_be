@@ -37,6 +37,7 @@ router.post("/login", async (req, res, next) => {
     return res.status(400).send({ message: "Er is iets misgegaan, sorry" });
   }
 });
+//
 
 router.get("/me", authMiddleware, async (req, res) => {
   // don't send back the password hash

@@ -18,14 +18,14 @@ router.post("/login", async (req, res, next) => {
     if (!email || !password) {
       return res
         .status(400)
-        .send({ message: "Please provide both email and password" });
+        .send({ message: "Vul een Email en Wachtwoord in" });
     }
 
     const user = await User.findOne({ where: { email } });
 
     if (!user || !bcrypt.compareSync(password, user.password)) {
       return res.status(400).send({
-        message: "User with that email not found or password incorrect",
+        message: "Gebruiker niet gevonden of wachtwoord onjuist",
       });
     }
 
@@ -34,7 +34,7 @@ router.post("/login", async (req, res, next) => {
     return res.status(200).send({ token, ...user.dataValues });
   } catch (error) {
     console.log(error);
-    return res.status(400).send({ message: "Something went wrong, sorry" });
+    return res.status(400).send({ message: "Er is iets misgegaan, sorry" });
   }
 });
 
@@ -66,14 +66,14 @@ router.post("/gebruikerLogin", async (req, res, next) => {
     if (!email || !password) {
       return res
         .status(400)
-        .send({ message: "Please provide both email and password" });
+        .send({ message: "Vul een Email en Wachtwoord in" });
     }
 
     const gebruiker = await Gebruiker.findOne({ where: { email } });
 
     if (!gebruiker || !bcrypt.compareSync(password, gebruiker.password)) {
       return res.status(400).send({
-        message: "User with that email not found or password incorrect",
+        message: "Gebruiker niet gevonden of wachtwoord onjuist",
       });
     }
 
@@ -82,7 +82,7 @@ router.post("/gebruikerLogin", async (req, res, next) => {
     return res.status(200).send({ gebruikerToken, ...gebruiker.dataValues });
   } catch (error) {
     console.log(error);
-    return res.status(400).send({ message: "Something went wrong, sorry" });
+    return res.status(400).send({ message: "Er is iets misgegaan, sorry" });
   }
 });
 
@@ -91,7 +91,7 @@ router.post("/signup", async (req, res) => {
 
   if (!userName || !email || !password || !level) {
     return res.status(400).send({
-      message: "Please provide an userName, email, password and a level",
+      message: "Vul alle velden in",
     });
   }
 
@@ -112,10 +112,10 @@ router.post("/signup", async (req, res) => {
     if (error.name === "SequelizeUniqueConstraintError") {
       return res
         .status(400)
-        .send({ message: "There is an existing account with this email" });
+        .send({ message: "Er is een bestaand account bij deze e-mail" });
     }
     console.log(error);
-    return res.status(400).send({ message: "Something went wrong, sorry" });
+    return res.status(400).send({ message: "Er is iets misgegaan, sorry" });
   }
 });
 

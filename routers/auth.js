@@ -53,6 +53,7 @@ router.get("/meGebruiker", gebruikerAuthMiddleware, async (req, res) => {
   const gebruiker = await Gebruiker.findOne({
     where: { email },
   });
+
   delete req.gebruiker.dataValues["password"];
 
   res.status(200).send({ ...req.gebruiker.dataValues, gebruiker });
@@ -75,7 +76,7 @@ router.post("/gebruikerLogin", async (req, res, next) => {
         message: "User with that email not found or password incorrect",
       });
     }
-    console.log(gebruiker);
+
     delete gebruiker.dataValues["password"]; // don't send back the password hash
     const gebruikerToken = GebruikertoJWT({ gebruikerId: gebruiker.id });
     return res.status(200).send({ gebruikerToken, ...gebruiker.dataValues });
@@ -104,9 +105,9 @@ router.post("/signup", async (req, res) => {
 
     delete newUser.dataValues["password"]; // don't send back the password hash
 
-    const token = GebruikertoJWT({ userId: newUser.id });
+    const gebruikerToken = GebruikertoJWT({ userId: newUser.id });
 
-    res.status(201).json({ GebruikerToken, ...newUser.dataValues });
+    res.status(201).json({ gebruikerToken, ...newUser.dataValues });
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
       return res

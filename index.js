@@ -49,7 +49,7 @@ app.use(corsMiddleWare());
 const cors = require("cors");
 
 var corsOptions = {
-  origin: "http://kids-online.netlify.app",
+  origin: "https://kids-online.netlify.app",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 

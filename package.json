@@ -13,6 +13,7 @@
     "dropDB": "npx sequelize-cli db:drop",
     "resetDB": "npm run dropDB && npm run initdev"
   },
+  "proxy": "https://kids-online.netlify.app",
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -1,3 +1,3 @@
 Header set Access-Control-Allow-Origin 'https://kids-online.netlify.app'
 Header always set Access-Control-Allow-Methods "POST, GET, DELETE, PUT"
-Header always set Access-Control-Allow-Headers "*"
+Header always set Access-Control-Allow-Headers "*" 

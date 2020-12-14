@@ -48,7 +48,7 @@ app.use(corsMiddleWare());
 
 const cors = require("cors");
 
-var whitelist = ["http://example1.com"];
+var whitelist = ["https://kids-online.netlify.app/"];
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {

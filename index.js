@@ -53,16 +53,9 @@ var corsOptions = {
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
-app.get("/upload", cors(corsOptions), async (req, res, next) => {
-  try {
-    const allQuizes = await Quizes.findAll();
-    res.status(200).json(allQuizes);
-  } catch (e) {
-    console.log("error: ", e);
-  }
+app.get("/", cors(corsOptions), function (req, res, next) {
+  res.json({ msg: "This is CORS-enabled for only example.com." });
 });
-
-app.use(cors());
 
 /**
  * Routes
@@ -70,26 +63,26 @@ app.use(cors());
  */
 
 // GET endpoint for testing purposes, can be removed
-app.get("/", (req, res) => {
-  res.send("Hi from express");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hi from express");
+// });
 
 // POST endpoint for testing purposes, can be removed
-app.post("/echo", (req, res) => {
-  res.json({
-    youPosted: {
-      ...req.body,
-    },
-  });
-});
+// app.post("/echo", (req, res) => {
+//   res.json({
+//     youPosted: {
+//       ...req.body,
+//     },
+//   });
+// });
 
 const { PORT } = require("./config/constants");
 
 const uploadRouter = require("./routers/quizzes");
 app.use("/", uploadRouter);
 
-const answerRouter = require("./routers/quizzes");
-app.use("/", answerRouter);
+// const answerRouter = require("./routers/quizzes");
+// app.use("/", answerRouter);
 
 const authRouter = require("./routers/auth");
 app.use("/", authRouter);

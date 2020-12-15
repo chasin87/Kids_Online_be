@@ -44,9 +44,7 @@ const bodyParserMiddleWare = express.json();
 app.use(bodyParserMiddleWare);
 
 const corsMiddleWare = require("cors");
-app.use(
-  corsMiddleWare({ origin: "https://kids-online.netlify.app/QuizStart" })
-);
+app.use(corsMiddleWare({ origin: true }));
 
 /**
  * Routes

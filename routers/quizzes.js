@@ -106,4 +106,15 @@ router.patch("/upload/:id", async (req, res) => {
   }
 });
 
+router.get("/upload/:id", async (req, res) => {
+  try {
+    const idQuizes = await Quizes.findByPk({
+      where: { quizId: req.params.id },
+    });
+    res.status(200).json(idQuizes);
+  } catch (e) {
+    console.log("error: ", e);
+  }
+});
+
 module.exports = router;

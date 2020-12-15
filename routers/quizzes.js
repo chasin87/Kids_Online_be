@@ -108,7 +108,7 @@ router.patch("/upload/:id", async (req, res) => {
 
 router.get("/upload/:id", async (req, res) => {
   try {
-    const idQuizes = await Quizes.findByPk({
+    const idQuizes = await Quizes.findAll({
       where: { id: req.params.id },
     });
     res.status(200).json(idQuizes);

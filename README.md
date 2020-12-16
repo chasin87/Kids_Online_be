@@ -18,7 +18,7 @@ Built with Node with Express for RestAPIs in the backend, and PostgreSQL with Se
 
 #### Video promotion Kids Online
 
-[![Kids Online](src/ScreenShot/YoutubeAfbeelding.png)](https://www.youtube.com/watch?v=TVZDm3VbKPM&feature=youtu.be "YouTube promotion Kids Online")
+[![Kids Online](/YoutubeAfbeelding.png)](https://www.youtube.com/watch?v=TVZDm3VbKPM&feature=youtu.be "YouTube promotion Kids Online")
 
 ## Endpoints
 
